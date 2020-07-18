@@ -1,0 +1,27 @@
+#env
+env/
+
+.firebaserc
+firebase.json
+storage.rules
+
+#firebase - GCP
+credentials.json
+
+#django
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+media/
+*.sqlite3
+*.pyc
+
+.vscode
+
+*.log
+local_settings.py
+
+dist/
+build/
+
+__pycache__/

@@ -1,0 +1,7 @@
+{% extends '../includes/base.html' %}
+{% block title %}Todos los productos{% endblock title %}
+{% block content %}
+    {% for product in object_list %}
+        {{product.name}}
+    {% endfor %}
+{% endblock content %}

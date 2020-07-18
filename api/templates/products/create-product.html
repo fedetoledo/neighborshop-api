@@ -1,0 +1,39 @@
+{% extends '../includes/base.html' %}
+	{% block title %}Agregar un producto{% endblock title %}
+	{% block content %}
+		<h3 class="title">Agregar un producto</h3>
+		<form method="post" action="" enctype="multipart/form-data">
+			{% csrf_token %}
+			{% for hidden in productForm.hidden_fields %}
+				{{hidden}}
+			{% endfor %}
+			<div class="field">
+				<div class="control">
+					<input type="text" placeholder="Nombre del producto" class="input" name="name">
+				</div>
+			</div>
+			<div class="field">
+				<div class="control">
+					<textarea rows="7" type="text" placeholder="Descripcion del producto" class="textarea" name="description" ></textarea>
+				</div>
+			</div>
+			<div class="field">
+				<div class="control">
+					<input type="number" placeholder="Precio" class="input" name="price">
+				</div>
+			</div>
+			{{productForm.categories}}
+			
+
+			{% for field in imageForm %}
+				<div class="field">
+					<div class="control">
+						{{field}}
+					</div>
+				</div>
+			{% endfor %}
+
+
+			<input class="button is-primary" type="submit" name="submit" value="Agregar producto">
+		</form>
+	{% endblock content %}
