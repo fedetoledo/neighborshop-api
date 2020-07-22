@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.views.generic import DetailView, ListView
 from django.views import View
-from .models import Product, ProductImage
-from .forms import NewProductForm, ProductImageForm
+from .models import Product, ProductImage, User, Market
+from .forms import UserLoginForm, NewProductForm, ProductImageForm, CreateUserForm
 from google.cloud import storage
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -11,6 +11,8 @@ import os
 import uuid
 import pathlib
 from google.cloud.storage.blob import Blob
+from django.urls import reverse_lazy
+from firebase import firebase
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/federico/Escritorio/barrio-ecommerce/backend/ecommerce/credentials.json'
 
@@ -40,7 +42,8 @@ def createProduct(request):
 		files = request.FILES.getlist('image')
 		if form.is_valid() and image_form.is_valid():
 			product_instance = form.save(commit=False)
-			product_instance.businessId = 21 #User business id
+			product_instance.market = Market.objects.get(owner__uid=request.session['user']['localId'])
+			# product_instance.businessId = 21 #User business id
 			product_instance.save()
 			for f in files:
 				f.name = get_random_name(f.name)
@@ -49,15 +52,15 @@ def createProduct(request):
 
 				#Upload image to remote bucket
 				file_path = str(pathlib.Path().absolute())+ "/media/temp/" + f.name
-				businessFolder = "businesses/"+str(product_instance.businessId)+"/"+f.name
+				businessFolder = "businesses/"+str(product_instance.market)+"/"+f.name
 				upload_blob(file_path, businessFolder)
 
 				#Download url and save to db
 				current_image = ProductImage.objects.get(image=file_instance.image)
-				current_image.remoteURL = "https://storage.googleapis.com/barrio-ecommerce.appspot.com/businesses/"+str(product_instance.businessId)+"/"+f.name
+				current_image.remoteURL = "https://storage.googleapis.com/barrio-ecommerce.appspot.com/businesses/"+str(product_instance.market)+"/"+f.name
 				current_image.save()
 				
-			return redirect('details', pk=product_instance.id)
+			return redirect('detalle', pk=product_instance.id)
 		else:
 			return redirect('')
 	else:
@@ -75,10 +78,53 @@ class ProductListView(ListView):
 	model = Product
 	template_name = "products/product-list.html"
 
-
 class DetailProduct(DetailView):
 	model = Product
 	template_name = "products/details.html"
 
 def HomeView(request):
 	return render(request, 'home.html')
+
+def loginFirebase(email, password):
+	firebase = firebase.FirebaseApplication('https://')
+
+class UserLoginView(FormView):
+	form_class = UserLoginForm
+	template_name = 'auth/login.html'
+	success_url = reverse_lazy('productos:profile')
+
+	def form_valid(self, form):
+		email = form.cleaned_data['email']
+		password = form.cleaned_data['password']
+
+		auth = firebase.auth()
+
+		user = auth.sign_in_with_email_and_password(email, password)
+
+		self.request.session['user'] = user
+		return super().form_valid(form)
+
+class CreateUserView(CreateView):
+	form_class = CreateUserForm
+	template_name = 'auth/signup.html'
+	success_url = reverse_lazy('productos:home')
+
+	def form_valid(self, form):
+		email = form.cleaned_data['email']
+		password = form.cleaned_data['password']
+
+		auth = firebase.auth()
+
+		signup = auth.create_user_with_email_and_password(email, password)
+
+		print('signup: ', signup)
+
+		return super().form_valid(form)
+
+def profileView(request):
+	uid = request.session['user']['localId']
+
+	print(Product.objects.filter(market__name='Conde'))
+	products = Product.objects.filter(market__owner__uid=uid)
+
+	return render(request, 'user/profile.html', {'products': products})

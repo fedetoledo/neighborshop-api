@@ -1,6 +1,6 @@
 from rest_framework import viewsets, filters
-from .models import User, Product, Business, Transaction, Rated, Favourites
-from .serializers import TransactionSerializer, RatedSerializer, FavouritesSerializer, UserSerializer, ProductSerializer, BusinessSerializer
+from .models import User, Product, Market, Transaction, Rated, Favourites
+from .serializers import TransactionSerializer, RatedSerializer, FavouritesSerializer, UserSerializer, ProductSerializer, MarketSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -12,9 +12,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'categories']
     filter_backends = (filters.SearchFilter,)
 
-class BusinessViewSet(viewsets.ModelViewSet):
-    queryset = Business.objects.all()
-    serializer_class = BusinessSerializer
+class MarketViewSet(viewsets.ModelViewSet):
+    queryset = Market.objects.all()
+    serializer_class = MarketSerializer
 
 class TransactionViewSet(viewsets.ModelViewSet):
 	queryset = Transaction.objects.all()

@@ -1,0 +1,50 @@
+
+.navbar {
+    box-shadow: 0 5px 6px -3px rgba(20,20,20,0.5);
+}
+
+.main-content {
+    margin: 0;
+}
+
+.main-content h2 {
+    text-align: center;
+}
+
+.left-menu {
+    background-color: #363636;
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+.main-content .column:not(:first-child) {
+    margin-top: 2em;
+}
+
+.menu-list li a {
+    color: #fff;
+}
+
+.menu-list a.is-active {
+    background-color: rgb(220,219,211);
+    color: #363636;
+}
+
+.all-products-title {
+    text-align: center;
+}
+
+.product-card {
+    background-color: #fff;
+    box-shadow: 0 5px 6px -3px rgba(20,20,20,0.4);
+    padding: 1.2em;
+    border-radius: 2px;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.statistics .card {
+    margin-right: 2em;
+}

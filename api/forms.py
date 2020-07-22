@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, ProductImage
+from .models import Product, ProductImage, User
 
 CATEGORIES_CHOICES = [
 	('Comidas', 'Comidas'),
@@ -48,3 +48,13 @@ class ProductImageForm(forms.ModelForm):
 			'class': 'button is-primary',
 			'image': forms.ClearableFileInput(attrs={'multiple': True}),
 		}
+
+class UserLoginForm(forms.ModelForm):
+	class Meta:
+		model = User
+		fields = ['email','password']
+
+class CreateUserForm(forms.ModelForm):
+	class Meta:
+		model = User
+		exclude = ['uid', 'userPicture']

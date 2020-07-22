@@ -1,0 +1,62 @@
+.header-wrapper {
+    height: 800px;
+    /* background: linear-gradient(-5deg, #cfd8dc 50%, #fff 0); */
+    background: rgb(38,50,56);
+    background: linear-gradient(125deg, rgba(38,50,56,1) 9%, rgba(62,86,98,1) 67%, rgba(93,114,130,1) 96%);
+    
+}
+
+.services {
+    padding: 4em;
+}
+
+.services .rounded-card {
+    padding: 2em;
+    height: 30em;
+}
+
+.precios {
+    text-align: center;
+    padding: 3em 0;
+    background-color: #263238;
+}
+
+.precios .bronze {
+    background-color: #a97142;
+    filter: brightness(1.3);
+}
+
+.precios .gold {
+    background-color: gold;
+}
+
+.precios .price-text {
+    text-align: center;
+    font-weight: 700;
+    font-size: 3em;
+}
+
+.precios hr {
+    width: 45%;
+    margin: 0 auto;
+    background-color: #111;
+}
+
+.precios .benefits {
+    width: 70%;
+    margin: 2em auto;
+}
+
+.precios .benefits ul {
+    text-align: left;
+}
+
+.precios .benefits li {
+    margin: 0.4em 0;
+}
+
+.precios button {
+    width: 45%;
+    background-color: #263238;
+    color: #fff;
+}

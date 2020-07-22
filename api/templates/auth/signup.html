@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrate</title>
+</head>
+<body>
+    <div class="container is-fluid">
+
+        <h1 class="title">Registrate</h1>
+        <form method="post" action="">
+            {{form.erros}}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Registrarse" name="submit" />
+        </form>
+    </div>
+</body>
+</html>

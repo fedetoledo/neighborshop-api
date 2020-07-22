@@ -1,0 +1,14 @@
+{% extends '../includes/base.html' %}
+{% block title %}{{request.session.user.email}}{% endblock title %}
+{% block content %}
+
+    <p class="all-products-title title">Todos los productos</p>
+    {% for p in products %}
+        <div class="product-card">
+            <p class="product-name">{{p.name}}</p>
+            <span class="icon">
+                <i class="mdi mdi-trash-can-outline has-text-danger"></i>
+            </span>
+        </div>
+    {% endfor %}
+{% endblock content %}

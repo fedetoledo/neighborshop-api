@@ -1,5 +1,5 @@
 from django.urls import path, include
-from api.views import createProduct, DetailProduct, HomeView, ProductUpdateView, ProductListView
+from api.views import profileView, UserLoginView, createProduct, DetailProduct, HomeView, ProductUpdateView, ProductListView, CreateUserView
 
 
 urlpatterns = [
@@ -7,5 +7,8 @@ urlpatterns = [
     path('nuevo/', createProduct),
     path('editar/<int:pk>', ProductUpdateView.as_view(), name='editar'),
     path('detalle/<int:pk>', DetailProduct.as_view(), name="detalle"),
-    path('',HomeView),
+    path('',HomeView, name='home'),
+    path('login', UserLoginView.as_view(), name='login'),
+    path('signup', CreateUserView.as_view(), name='signup'),
+    path('profile', profileView, name='profile'),
 ]
