@@ -1,28 +1,38 @@
-import time
-from datetime import timedelta
-from uuid import uuid4
+		
+import pyrebase
+from getpass import getpass
 
-from firebase_admin import firestore, initialize_app
-
-__all__ = ['send_to_firebase', 'update_firebase_snapshot']
-
-initialize_app()
-
-def send_to_firebase(raw_notification):
-    db = firestore.client()
-    start = time.time()
-    db.collection('notifications').document(str(uuid4())).create(raw_notification)
-    end = time.time()
-    spend_time = timedelta(seconds=end - start)
-    return spend_time
+firebaseConfig = {
+  #Key must be wrapped in " "
+    "apiKey": "AIzaSyD7b5sNyKgzDX6NMCwXaor7rR3_pf9MBJ0",
+    "authDomain": "barrio-ecommerce.firebaseapp.com",
+    "databaseURL": "https://barrio-ecommerce.firebaseio.com",
+    "projectId": "barrio-ecommerce",
+    "storageBucket": "barrio-ecommerce.appspot.com",
+    "messagingSenderId": "110705840395",
+    "appId": "1:110705840395:web:a10a96cc64690d18ee520e"
+}
 
 
-def update_firebase_snapshot(snapshot_id):
-    start = time.time()
-    db = firestore.client()
-    db.collection('notifications').document(snapshot_id).update(
-        {'is_read': True}
-    )
-    end = time.time()
-    spend_time = timedelta(seconds=end - start)
-    return spend_time
+firebase = pyrebase.initialize_app(firebaseConfig)
+
+
+# auth = firebase.auth()
+
+
+
+# #create users
+# user = auth.create_user_with_email_and_password(email, password)
+# print("Success .... ")
+
+
+# login = auth.sign_in_with_email_and_password(email, password)
+
+# #send email verification
+# auth.send_email_verification(login['idToken'])
+
+
+# #reset the password
+# auth.send_password_reset_email(email)
+
+# print("Success ... ")
