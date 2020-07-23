@@ -21,6 +21,6 @@ from django.conf import settings
 urlpatterns = [
     path('', include('control_panel.urls')),
     path('admin/', admin.site.urls),
-    path('productos/', include(('api.urls.products','productos'), namespace='productos')),
+    # path('productos/', include(('api.urls.products','productos'), namespace='productos')),
     path('api/', include('api.urls.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

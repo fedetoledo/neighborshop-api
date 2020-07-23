@@ -60,3 +60,8 @@
     background-color: #263238;
     color: #fff;
 }
+
+.precios .button:hover {
+    color: #fff;
+    box-shadow: 0 2px 6px 0px rgba(20,20,20,0.4);
+}

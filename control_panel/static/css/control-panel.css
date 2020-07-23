@@ -48,3 +48,7 @@
 .statistics .card {
     margin-right: 2em;
 }
+
+.go-back a {
+    color: #000;
+}

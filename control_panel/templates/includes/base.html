@@ -16,6 +16,9 @@
                 <h1 class="title" style="color:#fff;">NeighborShop!</h1>
             </a>
         </div>
+            <div class="navbar-end">
+                {% block username %}{% endblock %}
+            </div>
     </nav>
     <div class="main-content">
         <div class="columns">
@@ -32,10 +35,10 @@
                         Mis productos
                     </p>
                     <ul class="menu-list">
-                        <li><a>Agregar producto</a></li>
+                        <li><a href="/tienda/producto/nuevo">Agregar producto</a></li>
                         <li><a>Invitations</a></li>
                         <li><a>Cloud Storage Environment Settings</a></li>
-                        <li><a>Authentication</a></li>
+                        <li><a href="/logout">Cerrar sesion</a></li>
                     </ul>
                 </aside>
             </div>

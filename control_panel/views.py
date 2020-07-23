@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import FormView, CreateView, UpdateView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.views import View
 from api.models import Product, ProductImage, User, Market
 from .forms import UserLoginForm, NewProductForm, ProductImageForm, CreateUserForm
@@ -62,7 +64,7 @@ def createProduct(request):
 				
 			return redirect('detalle', pk=product_instance.id)
 		else:
-			return redirect('')
+			return redirect('home')
 	else:
 		form = NewProductForm()
 		image_form = ProductImageForm()
@@ -74,6 +76,11 @@ class ProductUpdateView(UpdateView):
 	fields = '__all__'
 	success_url = '../'
 
+class ProductDeleteView(DeleteView):
+	model = Product
+	template_name = 'products/confirm-delete.html'
+	success_url = reverse_lazy('tienda')
+
 class ProductListView(ListView):
 	model = Product
 	template_name = "products/product-list.html"
@@ -83,9 +90,6 @@ class DetailProduct(DetailView):
 	template_name = "products/details.html"
 
 def HomeView(request):
-
-	if request.session['user']:
-		return render(request, 'user/profile.html')
 	return render(request, 'home.html')
 
 def loginFirebase(email, password):
@@ -94,7 +98,7 @@ def loginFirebase(email, password):
 class UserLoginView(FormView):
 	form_class = UserLoginForm
 	template_name = 'auth/login.html'
-	success_url = reverse_lazy('productos:profile')
+	success_url = reverse_lazy('tienda')
 
 	def form_valid(self, form):
 		email = form.cleaned_data['email']
@@ -125,9 +129,15 @@ class CreateUserView(CreateView):
 		return super().form_valid(form)
 
 def profileView(request):
-	uid = request.session['user']['localId']
+	if 'user' in request.session:
+		uid = request.session['user']['localId']
+		user = User.objects.get(uid=uid)
+		products = Product.objects.filter(market__owner__uid=uid)
+		return render(request, 'user/profile.html', {'products': products, 'user': user})
+	return render(request, 'home.html')
 
-	user = User.objects.get(uid=uid)
-	products = Product.objects.filter(market__owner__uid=uid)
-
-	return render(request, 'user/profile.html', {'products': products, 'user': user})
+def logoutView(request):
+	#Delete the session id cookie
+	# del request.session['user']
+	logout(request)
+	return redirect('auth/login')
