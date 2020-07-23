@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView, CreateView, UpdateView
 from django.views.generic import DetailView, ListView
 from django.views import View
-from .models import Product, ProductImage, User, Market
+from api.models import Product, ProductImage, User, Market
 from .forms import UserLoginForm, NewProductForm, ProductImageForm, CreateUserForm
 from google.cloud import storage
 from django.db.models.signals import post_save
@@ -83,6 +83,9 @@ class DetailProduct(DetailView):
 	template_name = "products/details.html"
 
 def HomeView(request):
+
+	if request.session['user']:
+		return render(request, 'user/profile.html')
 	return render(request, 'home.html')
 
 def loginFirebase(email, password):

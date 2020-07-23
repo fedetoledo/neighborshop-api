@@ -1,5 +1,5 @@
 {% extends '../includes/base.html' %}
-{% block title %}{{request.session.user.email}}{% endblock title %}
+{% block title %}{{user.fullname}}{% endblock title %}
 {% block content %}
 
     <p class="all-products-title title">Todos los productos</p>
