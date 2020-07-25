@@ -1,0 +1,11 @@
+{% extends '../includes/base.html' %}
+
+{% block title %}Details
+{% endblock title %}
+
+{% block content %}
+    <p class="title">Detalle</p>
+	Nombre de la tienda: {{object.name}}
+	<a href="{% url 'eliminar-tienda' object.id %}">Eliminar tienda</a>
+
+{% endblock content %}

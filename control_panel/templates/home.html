@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/bulma.min.css">
+	<link rel="stylesheet" href="../../static/css/bulma.min.css">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
 	<link rel="stylesheet" href="../../static/css/global.css">
 	<link rel="stylesheet" href="../../static/css/home.css">
 	<title>NeighborShop!</title>
@@ -44,7 +45,6 @@
 			<div class="hero-body">
 				<div class="hero-container">
 					<p class="light-title title">Compra desde casa</p>
-					<p class="subtitle light-title">{{request.session.user.email}}</p>
 					{% comment %} <p class="subtitle light-title">Los mejores precios</p> {% endcomment %}
 				</div>
 			</div>
@@ -82,35 +82,89 @@
 		<section class="precios">
 			<h2 class="title light-title">Precios</h2>
 			<section class="columns is-centered">
-				<div class="column is-4">
+				<div class="column is-3">
 					<div class="rounded-card">
-						<p class="bronze title">Plan Bronce</p>
+						<div class="ribbon ribbon-top-left">
+							<span>1 MES GRATIS!</span>
+						</div>
+						<p class="title">Básico</p>
 						<p class="price-text">$299</p>
 						<hr>
 						<div class="benefits">
 							<ul>
-								<li>Publica hasta 15 productos</li>
-								<li>Cobra por mercado pago</li>
-								<li>Recibi estadisticas sobre tus ventas</li>
-								<li>1 banner para mostrar en la pantalla principal</li>
-								<li>Plataforma para gestionar tu negocio</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Publica hasta 15 productos
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Cobra por mercado pago
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Estadisticas sobre tus ventas
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Banner en pantalla principal
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Plataforma de gestion
+								</li>
 							</ul>
 						</div>
 						<button class="button">Contratar</button>
 					</div>
 				</div>
-				<div class="column is-4">
+				<div class="column is-3">
 					<div class="rounded-card">
-						<p class="gold title">Plan Gold</p>
+						<div class="ribbon ribbon-top-left"><span>1 MES GRATIS!</span></div>
+						<p class="title">Premium</p>
 						<p class="price-text">$499</p>
 						<hr>
 						<div class="benefits">
 							<ul>
-								<li>Publica hasta 60 productos</li>
-								<li>Cobra por mercado pago </li>
-								<li>Estadisticas detalladas sobre tu ventas</li>
-								<li>2 banners en la pantalla principal</li>
-								<li>Plataforma para gestionar tu productos</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Publica hasta 15 productos
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Cobra por mercado pago
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Estadisticas sobre tus ventas
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Banner en pantalla principal
+								</li>
+								<li>
+									<span class="icon">
+										<i class="mdi mdi-check-circle has-text-success"></i>
+									</span>
+									Plataforma de gestion
+								</li>
 							</ul>
 						</div>
 						<button class="button">Contratar</button>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/global.css">
+    <link rel="stylesheet" href="../../static/css/bulma.min.css">
+    <title>Crea tu tienda</title>
+</head>
+<body>
+    <section class="container has-text-centered">
+        <p class="has-text-center title">Crea tu tienda y empeza a vender online!</h1>
+        <div class="columns has-text-left is-centered">
+            <div class="column is-5">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input href="{% url 'tienda' %}" class="button" type="submit" value="Crear Tienda">
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

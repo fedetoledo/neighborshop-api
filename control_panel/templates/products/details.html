@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Details</title>
-</head>
-<body>
-	DETAILS
-	{{object.name}}
-	<a href="../">Ir atras</a>
-</body>
-</html>
+{% extends '../includes/base.html' %}
+{% block title %}Detalle {{object.name}}{% endblock title %}
+{% block content %}
+	<p class="title">Detalle</p>
+	Nombre del producto: {{object.name}}
+	<a href="{% url 'tienda' %}">Ir atras</a>
+
+{% endblock content %}

@@ -68,6 +68,7 @@ section.columns {
 }
 
 .rounded-card {
+    position: relative;
     background-color: #eee;
     border-radius: 5px;
     padding-bottom: 1em;

@@ -1,5 +1,5 @@
 from django import forms
-from api.models import Product, ProductImage, User
+from api.models import Product, ProductImage, User, Market
 
 CATEGORIES_CHOICES = [
 	('Comidas', 'Comidas'),
@@ -54,7 +54,22 @@ class UserLoginForm(forms.ModelForm):
 		model = User
 		fields = ['email','password']
 
-class CreateUserForm(forms.ModelForm):
+class UserCreateForm(forms.ModelForm):
 	class Meta:
 		model = User
 		exclude = ['uid', 'userPicture']
+
+class CreateMarketForm(forms.ModelForm):
+	class Meta:
+		model = Market
+		exclude = ['owner']
+		widgets = {
+			'name': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Nombre de tu tienda',
+			}),
+			'description': forms.Textarea(attrs={
+				'class': 'textarea',
+				'placeholder': 'Contale a tu clientes quien sos'
+			}),
+		}

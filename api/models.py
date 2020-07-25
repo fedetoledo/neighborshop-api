@@ -5,9 +5,9 @@ from django.urls import reverse
 class User(models.Model):
     uid = models.CharField(max_length=35, unique=True)
     fullName = models.CharField(max_length=30)
-    username = models.CharField(max_length=30)
+    username = models.CharField(max_length=30, unique=True)
     userPicture = models.ImageField(upload_to=None, null=True)
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(max_length=50, unique=True)
     password = models.CharField(max_length=30)
     phoneNumber = models.CharField(max_length=10)
 
@@ -20,6 +20,9 @@ class Market(models.Model):
     description = models.TextField(null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to=None, null=True)
+
+    def __str__(self):
+        return self.name
 
 # Create your models here.
 class Product(models.Model):
