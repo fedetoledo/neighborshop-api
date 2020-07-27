@@ -1,6 +1,8 @@
 {% extends '../includes/base.html' %}
 {% block title %}{{user.fullname}}{% endblock title %}
-{% block username %}{{user.fullName}}{% endblock %}
+{% block username %}{{user.fullname}}{% endblock %}
+{% block market_name %}{{market.name}}
+{% endblock market_name %}
 {% block content %}
 
     <p class="all-products-title title">Todos los productos</p>

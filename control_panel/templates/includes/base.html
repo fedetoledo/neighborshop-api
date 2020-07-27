@@ -28,8 +28,9 @@
                         Panel de Control
                     </p>
                     <ul class="menu-list">
+                        <li><a>{% block market_name %}
+                        {% endblock market_name %}</a></li>
                         <li><a href="{% url 'tienda' %}">Mis productos</a></li>
-                        <li><a>Customers</a></li>
                     </ul>
                     <p class="menu-label">
                         Mis productos

@@ -11,9 +11,9 @@ from django.core.signals import request_finished
 
 from firebase import firebase
 
-from api.models import User, Product
+from api.models import User, Product, Market
 from ..forms import UserLoginForm, UserCreateForm
-from ..utils import signup_and_login_from_firebase
+from ..utils import signup_and_login_from_firebase, get_current_user
 
 class UserLoginView(FormView):
     form_class = UserLoginForm
@@ -31,7 +31,7 @@ class UserLoginView(FormView):
         self.request.session['user'] = user
         
         return super().form_valid(form)
-
+    
 class CreateUserView(CreateView):
     form_class = UserCreateForm
     template_name = 'auth/signup.html'
@@ -44,7 +44,7 @@ class CreateUserView(CreateView):
         pre_save.connect(handle_new_user, sender=User, dispatch_uid='new_user_signal')
         return super().form_valid(form)
 
-@receiver(pre_save, sender=User, dispatch_uid='new_user_signal', )
+@receiver(pre_save, sender=User, dispatch_uid='new_user_signal')
 def handle_new_user(sender, **kwargs):
     new_user = kwargs.get('instance')
     email = new_user.email
@@ -57,11 +57,11 @@ def handle_new_user(sender, **kwargs):
 
 def profileView(request):
     if 'user' in request.session:
-        uid = request.session['user']['localId']
-        user = User.objects.get(uid=uid)
-        products = Product.objects.filter(market__owner__uid=uid)
-        return render(request, 'user/profile.html', {'products': products, 'user': user})
-    return render(request, 'home.html')
+        user = get_current_user(request)
+        products = Product.objects.filter(market__owner__uid=user.uid)
+        market = Market.objects.get(owner__uid=user.uid)
+        return render(request, 'user/profile.html', {'market': market, 'products': products, 'user': user})
+    return render(request, 'auth/login.html')
 
 def logoutView(request):
     #Delete the session id cookie

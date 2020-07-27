@@ -6,26 +6,17 @@ from django.urls import reverse_lazy
 
 from ..forms import CreateMarketForm
 from api.models import Market
+from ..utils import get_current_user
 
-def MarketCreateView(request):
+class MarketCreateView(CreateView):
+    form_class = CreateMarketForm
+    template_name = "market/create.html"
+    success_url = reverse_lazy('tienda')
 
-    if request.method == 'POST':
-        form = CreateMarketForm(request.POST)
-        if form.is_valid():
-            market_instance = form.save(commit=False)
-            
-            #Set current user as owner, pass uid
-            uid = request.session['uid']['localId']
-            userID = User.objects.get(uid=uid)
-            market_instance.owner = userID
-            market_instance.save()
+    def form_valid(self, form):
+        form.instance.owner = get_current_user(self.request)
+        return super().form_valid(form)
 
-            return redirect('tienda')
-        else:
-            return
-    else:
-        form = CreateMarketForm()
-        return render(request, 'market/create.html', {'form': form})
 
 class MarketDeleteView(DeleteView):
     model = Market
