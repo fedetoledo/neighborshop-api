@@ -12,8 +12,9 @@
         <p class="has-text-center title">Crea tu tienda y empeza a vender online!</h1>
         <div class="columns has-text-left is-centered">
             <div class="column is-5">
-                <form method="post" action="">
+                <form method="post" action="" enctype="multipart/form-data">
                     {% csrf_token %}
+                    {{form.errors}}
                     {{form.as_p}}
                     <input href="{% url 'tienda' %}" class="button" type="submit" value="Crear Tienda">
                 </form>

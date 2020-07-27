@@ -49,10 +49,9 @@ class ProductImageForm(forms.ModelForm):
 			'image': forms.ClearableFileInput(attrs={'multiple': True}),
 		}
 
-class UserLoginForm(forms.ModelForm):
-	class Meta:
-		model = User
-		fields = ['email','password']
+class UserLoginForm(forms.Form):
+	email = forms.CharField()
+	password = forms.CharField()
 
 class UserCreateForm(forms.ModelForm):
 	class Meta:

@@ -4,9 +4,7 @@
 		<h3 class="title">Agregar un producto</h3>
 		<form method="post" action="" enctype="multipart/form-data">
 			{% csrf_token %}
-			{% for hidden in productForm.hidden_fields %}
-				{{hidden}}
-			{% endfor %}
+			{{form.errors}}
 			<div class="field">
 				<div class="control">
 					<input type="text" placeholder="Nombre del producto" class="input" name="name">
