@@ -1,15 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
 from django.urls import reverse
 
-class User(models.Model):
+class User(AbstractUser):
     uid = models.CharField(max_length=35, unique=True)
-    fullname = models.CharField(max_length=30)
     username = models.CharField(max_length=30, unique=True)
-    user_picture = models.ImageField(upload_to=None, null=True)
     email = models.EmailField(max_length=50, unique=True)
     password = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=10)
+    user_picture = models.ImageField(upload_to=None, null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.username

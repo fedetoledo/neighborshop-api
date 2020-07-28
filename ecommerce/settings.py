@@ -129,3 +129,9 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTHENTICATION_BACKENDS = ('ecommerce.firebase_auth.FirebaseBackend',)
+
+AUTH_USER_MODEL = 'api.User'
+
+LOGIN_URL = 'login'

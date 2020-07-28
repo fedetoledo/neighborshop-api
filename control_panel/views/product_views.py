@@ -5,7 +5,7 @@ from django.views.generic import DetailView
 
 from api.models import Product, ProductImage, Market
 from ..forms import ProductImageForm, NewProductForm
-from ..utils import save_product_image_to_remote, get_current_user
+from ..utils import save_product_image_to_remote
 
 def createProductView(request):
 
@@ -15,9 +15,8 @@ def createProductView(request):
 		product_images = request.FILES.getlist('image')
 		if new_product_form.is_valid() and product_images_form.is_valid():
 			new_product = new_product_form.save(commit=False)
-			user_uid = get_current_user(request).uid
+			user_uid = request.user.uid
 			new_product.market = Market.objects.get(owner__uid=user_uid)
-			# new_product.market = Market.objects.get(owner__uid="zx8fYqGcLXawoosJKYb7OpYtvEB3")
 			new_product.save()
 			for image in product_images:
 				save_product_image_to_remote(image, new_product)

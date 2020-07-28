@@ -56,7 +56,34 @@ class UserLoginForm(forms.Form):
 class UserCreateForm(forms.ModelForm):
 	class Meta:
 		model = User
-		exclude = ['uid', 'userPicture']
+		exclude = ['uid', 'userPicture', 'last_login', 'user_permissions', 'user_group', 'date_joined',
+			'is_active','is_staff','is_superuser']
+		widgets = {
+			'first_name': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Nombre completo'
+			}),
+			'last_name': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Nombre completo'
+			}),
+			'username': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Nombre de usuario'
+			}),
+			'email': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Email'
+			}),
+			'password': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Contraseña',
+			}),
+			'phone_number': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Numero de telefono'
+			}),
+		}
 
 class CreateMarketForm(forms.ModelForm):
 	class Meta:

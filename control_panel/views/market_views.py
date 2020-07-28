@@ -3,10 +3,8 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 
-
 from ..forms import CreateMarketForm
 from api.models import Market
-from ..utils import get_current_user
 
 class MarketCreateView(CreateView):
     form_class = CreateMarketForm
@@ -14,9 +12,8 @@ class MarketCreateView(CreateView):
     success_url = reverse_lazy('tienda')
 
     def form_valid(self, form):
-        form.instance.owner = get_current_user(self.request)
+        form.instance.owner = self.request.user
         return super().form_valid(form)
-
 
 class MarketDeleteView(DeleteView):
     model = Market

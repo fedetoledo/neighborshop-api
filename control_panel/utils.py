@@ -54,7 +54,3 @@ def signup_and_login_from_firebase(email, password):
     signin = auth.sign_in_with_email_and_password(email, password)
     print(signin)
     return signin['localId']
-
-def get_current_user(request):
-    user_uid = request.session['user']['localId']
-    return User.objects.get(uid=user_uid)
