@@ -2,11 +2,12 @@ from django.views.generic import CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from ..forms import CreateMarketForm
 from api.models import Market
 
-class MarketCreateView(CreateView):
+class MarketCreateView(LoginRequiredMixin, CreateView):
     form_class = CreateMarketForm
     template_name = "market/create.html"
     success_url = reverse_lazy('tienda')
