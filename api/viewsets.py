@@ -5,6 +5,7 @@ from .serializers import TransactionSerializer, RatedSerializer, FavouritesSeria
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = 'uid'
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
@@ -17,13 +18,20 @@ class MarketViewSet(viewsets.ModelViewSet):
     serializer_class = MarketSerializer
 
 class TransactionViewSet(viewsets.ModelViewSet):
-	queryset = Transaction.objects.all()
-	serializer_class = TransactionSerializer
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
 
 class RatedViewSet(viewsets.ModelViewSet):
-	queryset = Rated.objects.all()
-	serializer_class = RatedSerializer
+    queryset = Rated.objects.all()
+    serializer_class = RatedSerializer
 
 class FavouritesViewSet(viewsets.ModelViewSet):
-	queryset = Favourites.objects.all()
-	serializer_class = FavouritesSerializer
+    queryset = Favourites.objects.all()
+    serializer_class = FavouritesSerializer
+
+    def get_queryset(self):
+        queryset = Favourites.objects.all()
+        uid = self.request.query_params.get('uid', None)
+        if uid is not None:
+            queryset = queryset.filter(user__uid=uid)
+        return queryset
