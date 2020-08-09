@@ -40,6 +40,23 @@ INSTALLED_APPS = [
     'api',
     'control_panel',
     'rest_framework',
+    'rest_framework.authtoken',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        #'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +148,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-AUTHENTICATION_BACKENDS = ('ecommerce.firebase_auth.FirebaseBackend',)
+# AUTHENTICATION_BACKENDS = ('ecommerce.firebase_auth.FirebaseBackend',)
 
 AUTH_USER_MODEL = 'api.User'
 

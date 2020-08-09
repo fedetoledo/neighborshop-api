@@ -12,6 +12,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class FavouritesSerializer(serializers.ModelSerializer):
     id: serializers.ReadOnlyField()
     product = ProductSerializer(many=False, read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
     class Meta:
         model = Favourites
         fields = '__all__'
