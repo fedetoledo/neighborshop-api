@@ -22,8 +22,9 @@ def upload_image_to_remote(source_filename, destination_blob_name):
     blob.make_public()
 
 def get_product_image_from_remote(product, product_image):
-    bucket_url = "https://storage.googleapis.com/barrio-ecommerce.appspot.com/businesses/"
-    product_image.remote_url = bucket_url + product.market.name + "/" + product_image.image.name
+    bucket_url = "https://storage.googleapis.com/barrio-ecommerce.appspot.com/markets/"
+    product_image.remote_url = bucket_url + str(product.market.id) + "/" + product_image.image.name
+    print(product_image.image.name)
     return product_image
     
 #Get random generated name
@@ -39,8 +40,8 @@ def save_product_image_to_remote(image, product):
     product_image.save() # Save to store the image in the server
 
     # TODO simplify file_path
-    file_path = str(pathlib.Path().absolute()) + "/media/temp/" + image.name
-    market_folder_path = "markets/" + str(product.market) + "/" + image.name
+    file_path = str(pathlib.Path().absolute()) + "/media/" + image.name
+    market_folder_path = "markets/" + str(product.market.id) + "/" + image.name
 
     upload_image_to_remote(file_path, market_folder_path)
 

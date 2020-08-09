@@ -1,0 +1,14 @@
+.auth-form {
+    width: 30%;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.form-end {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
