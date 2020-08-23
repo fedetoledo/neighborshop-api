@@ -32,9 +32,6 @@ class Product(models.Model):
     categories = ArrayField(models.CharField(max_length=20))
     market = models.ForeignKey(Market, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-    
     def get_absolute_url(self):
         return reverse('details', args=[str(self.id)])
 

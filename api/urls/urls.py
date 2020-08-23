@@ -4,6 +4,7 @@ from api.viewsets import (
 	FavouritesViewSet, RatedViewSet, TransactionViewSet, 
 	UserViewSet, ProductViewSet, MarketViewSet
 )
+from api.views import checkFavourite, userMobileSignup
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
@@ -15,4 +16,6 @@ router.register('transactions', TransactionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('check-favourite', checkFavourite),
+    path('signup-mobile', userMobileSignup),
 ]
