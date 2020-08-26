@@ -9,7 +9,7 @@ import pathlib
 
 from api.models import ProductImage, User
 
-environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/federico/Escritorio/barrio-ecommerce/backend/ecommerce/credentials.json'
+environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/federicotoledo/Desktop/barrio-ecommerce-backend/credentials.json'
 
 #Upload image to Google Cloud Storage
 def upload_image_to_remote(source_filename, destination_blob_name):

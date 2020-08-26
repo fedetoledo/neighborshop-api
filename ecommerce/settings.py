@@ -99,8 +99,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'barrioecommerce',
-        'USER': 'federico',
-        'PASSWORD': '21111997',
+        'USER': 'federicotoledo',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
