@@ -3,37 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../static/css/bulma.min.css">
+    <link rel="stylesheet" href="../../static/css/auth.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrate</title>
 </head>
 <body>
-    <div class="container is-fluid">
-
+    <div class="auth-form">
         <h1 class="title">Registrate</h1>
         <form method="post" action="">
             {% csrf_token %}
-            <div class="field">
-                <div class="control"><input placeholder="Nombre" name="first_name" type="text" class="input"></div>
+
+            <div class="columns">
+                <div class="column is-6">
+                    <div class="field">
+                        <div class="control"><input placeholder="Nombre" name="first_name" type="text" class="input"></div>
+                    </div>
+                </div>
+                <div class="column is-6">
+                    <div class="field">
+                        <div class="control"><input placeholder="Apellido" name="last_name" type="text" class="input"></div>
+                    </div>
+                </div>
             </div>
-            <div class="field">
-                <div class="control"><input placeholder="Apellido" name="last_name" type="text" class="input"></div>
-            </div>
-            <div class="field">
-                <div class="control"><input placeholder="Nombre de usuario" name="username" type="text" class="input"></div>
-            </div>
-            <div class="field">
-                <div class="control"><input placeholder="Email" name="email" type="text" class="input"></div>
-            </div>
-            <div class="field">
-                <div class="control"><input placeholder="Contraseña" name="password" type="text" class="input"></div>
-            </div>
-            <div class="field">
-                <div class="control"><input placeholder="Confirmar contraseña" name="repeat-password" type="text" class="input"></div>
+                    <div class="field">
+                        <div class="control"><input placeholder="Nombre de usuario" name="username" type="text" class="input"></div>
+                    </div>
+                    <div class="field">
+                        <div class="control"><input placeholder="Email" name="email" type="text" class="input"></div>
+                    </div>
+            <div class="columns">
+                <div class="column is-6">
+                    <div class="field">
+                        <div class="control"><input placeholder="Contraseña" name="password" type="text" class="input"></div>
+                    </div>
+                </div>
+                <div class="column is-6">
+                    <div class="field">
+                        <div class="control"><input placeholder="Confirmar contraseña" name="repeat-password" type="text" class="input"></div>
+                    </div>
+                </div>
             </div>
             <div class="field">
                 <div class="control"><input placeholder="Telefono" name="phone_number" type="text" class="input"></div>
             </div>
-            <input class="button" type="submit" value="Registrarse" name="submit" />
+            <div class="form-end">
+                <input class="button" type="submit" value="Registrarse" name="submit">
+                <span>Ya sos usuario? <a href="{% url 'login' %}">Iniciar sesión</a></span>
+            </div>
         </form>
     </div>
 </body>

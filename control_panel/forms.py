@@ -50,7 +50,7 @@ class ProductImageForm(forms.ModelForm):
 		}
 
 class UserLoginForm(forms.Form):
-	email = forms.CharField()
+	username = forms.CharField()
 	password = forms.CharField()
 
 class UserCreateForm(forms.ModelForm):
