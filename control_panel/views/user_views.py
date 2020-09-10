@@ -9,7 +9,6 @@ from django.contrib.auth.hashers import make_password
 
 from api.models import User, Product, Market
 from ..forms import UserLoginForm, UserCreateForm
-from ..utils import signup_and_login_from_firebase
 
 class UserLoginView(FormView):
     form_class = UserLoginForm
@@ -34,6 +33,8 @@ class CreateUserView(CreateView):
     def form_valid(self, form):
         user_data = form.save(commit=False)
 
+        print('CREATE USER: ', self.request)
+
         username = user_data.username
         password = user_data.password
 
@@ -48,8 +49,8 @@ class CreateUserView(CreateView):
 @login_required
 def profileView(request):
     user = request.user
-    products = Product.objects.filter(market__owner__uid=user.uid)
-    market = Market.objects.get(owner__uid=user.uid)
+    products = Product.objects.filter(market__owner__id=user.id)
+    market = Market.objects.get(owner__id=user.id)
     return render(request, 'user/profile.html', {'products': products, 'user': user})
 
 @login_required

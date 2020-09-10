@@ -1,16 +1,15 @@
 from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
-from .models import User, Product, Market, Transaction, Rated, Favourites
+from .models import User, Product, Market, Transaction, Rated, Favourites, Category
 from .serializers import (
     TransactionSerializer, RatedSerializer, FavouritesSerializer, 
-    UserSerializer, ProductSerializer, MarketSerializer
+    UserSerializer, ProductSerializer, MarketSerializer, CategorySerializer
 )
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    lookup_field = 'uid'
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
@@ -37,7 +36,11 @@ class FavouritesViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Favourites.objects.all()
-        uid = self.request.query_params.get('uid', None)
-        if uid is not None:
-            queryset = queryset.filter(user__uid=uid)
+        id = self.request.query_params.get('id', None)
+        if id is not None:
+            queryset = queryset.filter(user__id=id)
         return queryset
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

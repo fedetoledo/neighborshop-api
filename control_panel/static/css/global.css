@@ -39,10 +39,6 @@ html::-webkit-scrollbar {
     transition: background-color 200ms linear;
 }
 
-.navbar h1 {
-    font-size: 2em;
-}
-
 .navbar-brand .navbar-item {
     background-color: transparent !important;
 }

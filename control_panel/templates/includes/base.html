@@ -1,26 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/static/css/bulma.min.css" />
-    <link rel="stylesheet" href="/static/css/global.css" />
-    <link rel="stylesheet" href="/static/css/control-panel.css" />
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/global.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/control-panel.css'%}" />
     <title>NeighborShop! - {% block title %}{% endblock title %}</title>
 </head>
 <body>
-    <nav class="navbar is-dark">
+    <nav class="navbar">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
-                <h1 class="title" style="color:#fff;">NeighborShop!</h1>
+                <img src={{market.logo.url}} alt={{market.name}}/>
+                <span class='title navbar-item'>{{market.name}}</span>
             </a>
         </div>
-            <div class="navbar-end">
-                <span class="title navbar-item">
-                    {{market.name}}
-                </span>
-            </div>
     </nav>
     <div class="main-content">
         <div class="columns">
@@ -38,6 +35,13 @@
                     <ul class="menu-list">
                         <li><a href="/tienda/producto/nuevo">Agregar producto</a></li>
                         <li><a href="/logout">Cerrar sesion</a></li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div style='border-radius:50%; background-color: red;'>
+                                <img src={{user.image.url}} alt='user profile'/>
+                            </div>
+                        </li>
                     </ul>
                 </aside>
             </div>

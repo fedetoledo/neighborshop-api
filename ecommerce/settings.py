@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = 'c&ntzi6zf^236nw2ujko($xy#e+h7*(wa3r$d5=2r2f=l4t80g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.100.11']
+ALLOWED_HOSTS = ['localhost','192.168.100.23']
 
 
 # Application definition
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'control_panel',
     'rest_framework',
     'rest_framework.authtoken',
+    'storages',
 ]
 
 REST_FRAMEWORK = {
@@ -139,18 +141,34 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'api.User'
+
+LOGIN_URL = 'login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# AUTHENTICATION_BACKENDS = ('ecommerce.firebase_auth.FirebaseBackend',)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-AUTH_USER_MODEL = 'api.User'
+AWS_ACCESS_KEY_ID = 'AKIAQBG6PL6WFAPFMVZO'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'ns-assets'
+AWS_REGION = 'us-east-2'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400'
+}
+AWS_LOCATION = 'static'
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = None
 
-LOGIN_URL = 'login'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'ecommerce.storage_backend.MediaStorage'

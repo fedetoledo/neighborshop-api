@@ -18,10 +18,18 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework.authtoken import views
-
+from api.views import (
+    CustomAuthtoken, 
+    checkFavourite, 
+    userMobileSignup,
+    user_upload_picture
+)
 urlpatterns = [
     path('', include('control_panel.urls')),
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls.urls')),
-    path('api-token', views.obtain_auth_token),
+    path('api/', include('api.urls')),
+    path('api-token', CustomAuthtoken.as_view()),
+    path('signup-mobile', userMobileSignup),
+    path('user/check-favourite', checkFavourite),
+    path('user/upload-picture', user_upload_picture),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

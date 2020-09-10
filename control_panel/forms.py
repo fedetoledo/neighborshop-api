@@ -56,8 +56,7 @@ class UserLoginForm(forms.Form):
 class UserCreateForm(forms.ModelForm):
 	class Meta:
 		model = User
-		exclude = ['uid', 'userPicture', 'last_login', 'user_permissions', 'user_group', 'date_joined',
-			'is_active','is_staff','is_superuser']
+		fields = ['first_name', 'last_name', 'username', 'email', 'password', 'phone_number', 'image']
 		widgets = {
 			'first_name': forms.TextInput(attrs={
 				'class': 'input',

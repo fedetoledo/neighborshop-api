@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from .models import User, Product, ProductImage, Market, Transaction, Favourites, Rated
+from .models import (
+    User, Product, ProductImage, Market, 
+    Transaction, Favourites, Rated, Category
+)
 
 class ProductSerializer(serializers.ModelSerializer):
     id: serializers.ReadOnlyField()
@@ -22,10 +25,10 @@ class FavouritesSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     id: serializers.ReadOnlyField()
     #favourite_products = serializers.SlugRelatedField(slug_field='product', many=True, read_only=True)
-    favourite_products = FavouritesSerializer(many=True)
+    # favourite_products = FavouritesSerializer(many=True, required=None)
     class Meta:
         model = User
-        fields = ['id','uid','username','email','phone_number','user_picture','first_name','last_name','favourite_products']
+        fields = ['id','username','email','phone_number','picture','first_name','last_name']
 
 class ProductImageSerializer(serializers.ModelSerializer):
     id: serializers.ReadOnlyField()
@@ -49,4 +52,9 @@ class TransactionSerializer(serializers.ModelSerializer):
     id: serializers.ReadOnlyField()
     class Meta:
         model = Transaction
+        fields = '__all__'
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
         fields = '__all__'

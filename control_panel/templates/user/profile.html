@@ -6,7 +6,10 @@
     {% if products %}
         {% for p in products %}
             <div class="product-card">
-                <p class="product-name">{{p.name}}</p>
+                <p class="product-name">
+                    <span>{{p.name}}</span>
+                    <span>${{p.price}}</span>
+                </p>
                 <div class="actions">
                     <span class="icon">
                         <a href="{% url 'editar' p.id %}">

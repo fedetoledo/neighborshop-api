@@ -1,8 +1,23 @@
 {% extends '../includes/base.html' %}
-{% block title %}Detalle {{object.name}}{% endblock title %}
+{% block title %}Detalle {{product.name}}{% endblock title %}
 {% block content %}
-	<p class="title">Detalle</p>
-	Nombre del producto: {{object.name}}
+
+	<div class='product-detail'>
+		<p class="title">Detalle</p>
+		<p>Nombre del producto: {{product.name}}</p>
+		<p>Descripcion: {{product.description}}</p>
+		<p>Precio: {{product.price}}</p>
+	</div>
+	<div class='product-images'>
+		{% for image in images %}
+			<img src={{image.image.url}} alt={{product.name}} />
+		{% endfor %}
+	</div>
+
+	<h3>Categorias</h3>
+	{% for cat in product.categories %}
+		{{cat}}
+	{% endfor %}
 	<a href="{% url 'tienda' %}">Ir atras</a>
 
 {% endblock content %}
