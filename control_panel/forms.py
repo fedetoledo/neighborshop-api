@@ -15,8 +15,9 @@ CATEGORIES_CHOICES = [
 	('Bebidas', 'Bebidas'),
 ]
 
-class NewProductForm(forms.ModelForm):
+class ProductCreateForm(forms.ModelForm):
 	categories = forms.MultipleChoiceField(
+		label='Categorias',
 		widget=forms.CheckboxSelectMultiple(attrs={
 			'class': 'categories-checkbox',
 		}),
@@ -25,6 +26,11 @@ class NewProductForm(forms.ModelForm):
 	class Meta:
 		model = Product
 		fields = ['name','description','price','categories']
+		labels = {
+			'name': 'Nombre del producto',
+			'description': 'Descripcion del producto',
+			'price': 'Precio del producto',
+		}
 		widgets = {
 			'name': forms.TextInput(attrs={
 				'class': 'input',
@@ -38,6 +44,37 @@ class NewProductForm(forms.ModelForm):
 				'class': 'input',
 				'placeholder': 'Precio'
 				}),
+		}
+
+class ProductUpdateForm(forms.ModelForm):
+	categories = forms.MultipleChoiceField(
+		label='Categorias',
+		widget=forms.CheckboxSelectMultiple(attrs={
+			'class': 'categories-checkbox',
+		}),
+		choices=CATEGORIES_CHOICES
+	)
+	class Meta:
+		model = Product
+		fields = ['name', 'description', 'price', 'categories']
+		labels = {
+			'name': 'Nombre del producto',
+			'description': 'Descripcion del producto',
+			'price': 'Precio del producto',
+		}
+		widgets = {
+			'name': forms.TextInput(attrs={
+				'class': 'input',
+				'placeholder': 'Nombre del producto',
+			}),
+			'description': forms.Textarea(attrs={
+				'class': 'textarea',
+				'placeholder': 'Descripcion del producto',
+			}),
+			'price': forms.NumberInput(attrs={
+				'class': 'input',
+				'placeholder': 'Precio del producto',
+			}),
 		}
 
 class ProductImageForm(forms.ModelForm):
@@ -60,11 +97,11 @@ class UserCreateForm(forms.ModelForm):
 		widgets = {
 			'first_name': forms.TextInput(attrs={
 				'class': 'input',
-				'placeholder': 'Nombre completo'
+				'placeholder': 'Nombre'
 			}),
 			'last_name': forms.TextInput(attrs={
 				'class': 'input',
-				'placeholder': 'Nombre completo'
+				'placeholder': 'Apellido'
 			}),
 			'username': forms.TextInput(attrs={
 				'class': 'input',
@@ -97,4 +134,25 @@ class CreateMarketForm(forms.ModelForm):
 				'class': 'textarea',
 				'placeholder': 'Contale a tu clientes quien sos'
 			}),
+		}
+
+class UpdateMarketForm(forms.ModelForm):
+	class Meta:
+		model = Market
+		fields = ['name', 'description', 'logo', 'phone_number']
+		labels = {
+			'name': 'Nombre de la tienda',
+			'description': 'Descripcion de la tienda',
+			'phone_number': 'Numero de telefono'
+		}
+		widgets = {
+			'name': forms.TextInput(attrs={
+				'class': 'input',
+			}),
+			'description': forms.Textarea(attrs={
+				'class': 'textarea',
+			}),
+			'phone_number': forms.TextInput(attrs={
+				'class': 'input',
+			})
 		}

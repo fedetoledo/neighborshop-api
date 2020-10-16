@@ -28,7 +28,7 @@ class UserLoginView(FormView):
 class CreateUserView(CreateView):
     form_class = UserCreateForm
     template_name = 'auth/signup.html'
-    success_url = reverse_lazy('nueva-tienda')
+    success_url = reverse_lazy('market-create')
 
     def form_valid(self, form):
         user_data = form.save(commit=False)
@@ -47,11 +47,14 @@ class CreateUserView(CreateView):
             return super().form_valid(form)
 
 @login_required
-def profileView(request):
+def marketView(request):
     user = request.user
     products = Product.objects.filter(market__owner__id=user.id)
-    market = Market.objects.get(owner__id=user.id)
-    return render(request, 'user/profile.html', {'products': products, 'user': user})
+    try:
+        market = Market.objects.get(owner__id=user.id)
+    except Market.DoesNotExist:
+        return redirect('/tienda/crear')
+    return render(request, 'user/market.html', {'products': products, 'user': user})
 
 @login_required
 def logoutView(request):

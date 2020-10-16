@@ -1,0 +1,17 @@
+{% extends '../includes/control-panel.html' %}
+{% block title %}Editar Producto{% endblock title %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class='field'>
+                <label class='label'>{{field.label}}</label>
+                <div class='control'>
+                    {{field}}
+                </div>
+            </div>
+        {% endfor %}
+        <input class='button' type="submit" name="submit" value="Modificar Producto" />
+        <a class='button' href="{% url 'product-detail' object.id %}">Atras</a>
+    </form>
+{% endblock content %}

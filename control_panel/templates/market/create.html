@@ -12,7 +12,7 @@
 <body>
     <section class="align-vertical">
         <p class="has-text-centered title">
-            {{request.user.first_name}}, ahora crea tu tienda y empeza a vender online!</h1>
+            {{request.user.first_name}}, ahora crea tu tienda y mostra tus productos!</h1>
         <div class="columns is-centered">
             <div class="column is-7">
                 <form method="post" action="" enctype="multipart/form-data">
@@ -23,6 +23,11 @@
                     </div>
                     <div class="field">
                         <div class="control"><textarea name="description" placeholder="Descripcion de tu tienda" cols="30" rows="10" class="textarea"></textarea></div>
+                    </div>
+                    <div class='field'>
+                        <div class='control'>
+                            <input name='phone_number' placeholder="Numero de telefono" type='text' class='input' />
+                        </div>
                     </div>
                     <div class="field">
                         <div class="file">

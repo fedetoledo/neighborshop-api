@@ -1,25 +1,67 @@
 
 .navbar {
-    box-shadow: 0 5px 6px -3px rgba(20,20,20,0.5);
+    box-shadow: 0 2px 6px -3px rgba(20,20,20,0.5);
+    /* min-height: 3.25rem; */
+    z-index: 30;
+    background-color: #dddccc;
+}
+
+.navbar-brand {
+    align-items: center;
+}
+
+.navbar .title:not(:last-child) {
+    color: #545454;
+    margin-bottom: 0;
+}
+
+/* Left menu */
+
+.aside {
+    height: 100vh;
+    width: 14rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    background: rgb(38,50,56);
+    background: linear-gradient(0deg, rgba(38,50,56,1) 9%, rgba(62,86,98,1) 67%, rgba(93,114,130,1) 
+    96%);
+    text-align: center;
+}
+
+.aside-list li a {
+    display: block;
+    padding: 1rem;
+    color: #f9f9f9;
+    text-decoration: none;
+}
+
+.aside-list li a:hover {
+    background: #f9f9f9;
+    color: #363636;
+}
+
+.market-logo {
+    max-width: 150px;
+}
+
+.main-content, .navbar {
+    padding-left: 14rem;
+}
+
+.main-content .main-wrapper {
+    padding: 2rem;
 }
 
 .main-content {
+    padding-top: 5rem;
     margin: 0;
     height: 100%;
 }
 
 .main-content h2 {
     text-align: center;
-}
-
-.left-menu {
-    background-color: #363636;
-    padding-top: 2em;
-    padding-left: 2em;
-}
-
-.main-content .column:not(:first-child) {
-    margin-top: 2em;
 }
 
 .menu-list li a {
@@ -31,19 +73,21 @@
     color: #363636;
 }
 
-.all-products-title {
-    text-align: center;
-}
-
 .product-card {
-    background-color: #fff;
-    box-shadow: 0 5px 6px -3px rgba(20,20,20,0.4);
-    padding: 1.2em;
+    max-width: 50%;
+    background-color: #3B525D;
+    box-shadow: 0 2px 6px -3px rgba(20,20,20,0.4);
+    padding: 1.2rem;
     border-radius: 2px;
     margin-bottom: 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: #fff;
+}
+
+.product-card:hover {
+    cursor: pointer;
 }
 
 .product-card .product-name {
@@ -54,8 +98,140 @@
 
 .statistics .card {
     margin-right: 2em;
+    border-radius: 10px;
 }
 
 .go-back a {
     color: #000;
+}
+
+/* Product detail */
+
+.product-detail {
+    width: 100%;
+}
+
+.title-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.title-content .icon a {
+    font-size: 2em;
+    color: #262626;
+}
+
+.product-description {
+    background-color: #e8e8e8;
+    padding: 1rem;
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 1rem;
+}
+
+.product-description .description {
+    text-align: justify;
+}
+
+.product-information {
+    justify-content: space-between;
+    margin: 0 .0rem;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 1.3em;
+    background-color: #e8e8e8;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.product-categories {
+    background-color: #e8e8e8;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.product-categories .subtitle {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.category-content {
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.category {
+    font-size: 1.1em;
+    font-style: italic;
+}
+
+.buttons a {
+    background-color: #dddccc;
+    padding: 1rem 1.5rem;
+    margin-right: 1rem;
+    color: #363636;
+    border-radius: 4px;
+}
+
+.product-images {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.product-image {
+    width: 256px;
+    height: 200px;
+}
+
+.product-images .add-images-button {
+    margin-top: 1rem;
+    display: block;
+}
+
+.no-images {
+    font-weight: 600;
+}
+
+/* Product update */
+
+.categories-checkbox li {
+    margin-right: .4rem;
+    display: inline-block;
+}
+
+/* Product deletetion */
+
+.delete-product {
+    background-color: #e8e8e8;
+    padding: 2rem;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-product .delete-warning {
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-bottom: 1.5rem;
+}
+
+.delete-product .buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Media queries */
+
+@media only screen and (max-width: 768px) {
+    .product-card {
+        min-width: 100%;
+    }
 }

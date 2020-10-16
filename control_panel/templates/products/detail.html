@@ -1,0 +1,49 @@
+{% extends '../includes/control-panel.html' %}
+{% block title %}Detalle {{product.name}}{% endblock title %}
+{% block content %}
+	<div class="product-detail columns is-centered">
+		<div class='column is-8'>
+			<div class="title-content">
+				<span class="icon">
+					<a href="{% url 'market' %}" class="mdi mdi-arrow-left"></a>
+				</span>
+				<p class="title">{{product.name}}</p>
+			</div>
+			<div class="product-description">
+				<p class='title'>Descripcion</p>
+				<p class='description'>{{product.description}}</p>
+			</div>
+			<div class="product-information columns">
+				<p class='product-price column is-5'>Precio: ${{product.price}}</p>
+				<div class="product-categories column is-6">
+					<p class='subtitle'>Categorias</p>
+					<ul>
+						{% for category in product.categories %}
+						<div class="category-content">
+							<span class="icon"><i class="mdi mdi-arrow-right"></i></span>
+							<li class="category">{{category}}</li>
+						</div>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="buttons">
+				<a class='button is-warning' href="{% url 'product-edit' product.id %}">Editar</a>
+				<a class='button is-danger' href="{% url 'product-delete' product.id %}">Eliminar</a>
+			</div>
+		</div>
+		<div class="column is-4">
+			<div class='product-images'>
+				{% if images %}
+					{% for image in images %}
+						<img class='product-image' src={{image.image.url}} alt={{product.name}} />
+					{% endfor %}
+				{% else %}
+					<p class='no-images'>No hay imagenes de este producto</p>
+				{% endif %}
+				<a class='add-images-button' href="{% url 'product-edit' product.id %}">Agregar imagenes</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

@@ -1,16 +1,16 @@
-from django.views.generic import CreateView, DeleteView, DetailView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from ..forms import CreateMarketForm
+from ..forms import CreateMarketForm, UpdateMarketForm
 from api.models import Market
 
 class MarketCreateView(LoginRequiredMixin, CreateView):
     form_class = CreateMarketForm
     template_name = "market/create.html"
-    success_url = reverse_lazy('tienda')
+    success_url = reverse_lazy('market')
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -19,8 +19,14 @@ class MarketCreateView(LoginRequiredMixin, CreateView):
 class MarketDeleteView(DeleteView):
     model = Market
     template_name = 'market/confirm-delete.html'
-    success_url = reverse_lazy('tienda')
+    success_url = reverse_lazy('market')
 
 class MarketDetailView(DetailView):
     model = Market
     template_name = "market/detail.html"
+
+class MarketUpdateView(UpdateView):
+    form_class = UpdateMarketForm
+    model = Market
+    template_name = "market/edit.html"
+    success_url = reverse_lazy('market')

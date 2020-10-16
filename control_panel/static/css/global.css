@@ -2,9 +2,6 @@ html { height: 100%;}
 
 body {
     height: 100%;
-    /* background-color: #dddccc; */
-    background: rgb(221,219,187);
-    background: linear-gradient(145deg, rgba(221,219,187,1) 4%, rgba(221,219,210,1) 49%, rgba(241,240,222,1) 100%);
 }
 
 html::-webkit-scrollbar {
@@ -18,13 +15,6 @@ html::-webkit-scrollbar {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-}
-
-.categories-checkbox {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .light-title {
@@ -85,8 +75,6 @@ section.columns {
     padding-bottom: 1em;
     box-shadow: 0 2px 2.5px 1px rgba(20,20,20,0.2);
 }
-
-
 
 .rounded-card .title {
     padding: 1em 0;

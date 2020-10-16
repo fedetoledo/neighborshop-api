@@ -1,0 +1,16 @@
+{% extends '../includes/control-panel.html' %}
+{% block title %}{{user.fullname}}{% endblock title %}
+{% block content %}
+
+    <p class="all-products-title title">Todos los productos</p>
+    {% if products %}
+        {% for p in products %}
+            <div onclick="location.href='{% url 'product-detail' p.id %}'" class="product-card">
+                <p class="product-name">{{p.name}}</p>
+                <span>${{p.price}}</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center;">No hay productos en tu tienda todavia</p>
+    {% endif %}
+{% endblock content %}

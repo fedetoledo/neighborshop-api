@@ -1,0 +1,15 @@
+{% extends '../includes/control-panel.html' %}
+{% block title %}{{object.name}}{% endblock title %}
+{% block content %}
+
+    <form method="post">{% csrf_token %}
+        <div class='delete-product'>
+            <p class='delete-warning'>Seguro que queres borrar "{{ object.name }}"?</p>
+            <div class='buttons'>
+                <input class="button is-danger" type="submit" value="Confirmar">
+                <a class='button' href="{% url 'product-detail' object.id %}">Volver</a>
+            </div>
+        </div>
+    </form>
+
+{% endblock content %}
