@@ -1,5 +1,6 @@
 #env
 env/
+.env
 
 .DS_Store
 
@@ -27,3 +28,5 @@ dist/
 build/
 
 __pycache__/
+
+launchServer.sh
