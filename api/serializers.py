@@ -31,7 +31,7 @@ class MarketSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     id: serializers.ReadOnlyField()
     images = ProductImageSerializer(many=True, read_only=True)
-    market = ProductMarketSerializer(many=False, read_only=True)
+    market = serializers.PrimaryKeyRelatedField(queryset=Market.objects.all())
     class Meta:
         model = Product
         fields = ['id', 'name', 'description', 'price', 'categories', 'market', 'images']
@@ -50,7 +50,7 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
     class Meta:
         model = User
-        fields = ['id','username','email','phone_number','image','first_name','last_name', 'password']
+        fields = ['id','username','email','phone_number','image','first_name','last_name', 'password', 'is_seller']
 
     def create(self, validated_data):
         user = super().create(validated_data)
