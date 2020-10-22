@@ -1,11 +1,11 @@
 from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from api.permissions import IsLoggedInUserOrAdmin, IsAdminUser, IsSellerOrAdmin
 from .models import User, Product, Market, Transaction, ProductRating, Favourites, Category
 from .serializers import (
-    TransactionSerializer, ProductRatingSerializer, FavouritesSerializer, 
+    TransactionSerializer, ProductRatingSerializer, FavouritesSerializer,
     UserSerializer, ProductSerializer, MarketSerializer, CategorySerializer
 )
-from api.permissions import IsLoggedInUserOrAdmin, IsAdminUser, IsSellerOrAdmin
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -16,7 +16,9 @@ class UserViewSet(viewsets.ModelViewSet):
         permission_classes = []
         if self.action == 'create':
             permission_classes = [AllowAny]
-        elif self.action == 'retrieve' or self.action == 'update' or self.action == 'partial_update':
+        elif self.action == 'retrieve' or \
+            self.action == 'update' or \
+            self.action == 'partial_update':
             permission_classes = [IsLoggedInUserOrAdmin]
         elif self.action == 'list' or self.action == 'destroy':
             permission_classes = [IsAdminUser]
@@ -70,9 +72,9 @@ class FavouritesViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Favourites.objects.all()
-        id = self.request.query_params.get('id', None)
+        user_id = self.request.query_params.get('id', None)
         if id is not None:
-            queryset = queryset.filter(user__id=id)
+            queryset = queryset.filter(user__id=user_id)
         return queryset
 
 class CategoryViewSet(viewsets.ModelViewSet):

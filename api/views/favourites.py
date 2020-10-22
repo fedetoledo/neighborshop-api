@@ -1,7 +1,7 @@
-from api.models import User, Favourites, Product
+import json
 from rest_framework.response import Response
 from rest_framework.views import APIView
-import json
+from api.models import User, Favourites, Product
 
 class CheckFavourite(APIView):
 
@@ -31,5 +31,3 @@ class ToggleFavourite(APIView):
             Favourites.objects.create(user=user, product=product)
             response = {'result': 'favourite added'}
         return Response(response)
-
-

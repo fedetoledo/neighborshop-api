@@ -1,14 +1,14 @@
 from django.urls import path, include
 from rest_framework import routers
 from api.viewsets import (
-	FavouritesViewSet, ProductRatingViewSet, TransactionViewSet, 
+	FavouritesViewSet, ProductRatingViewSet, TransactionViewSet,
 	UserViewSet, ProductViewSet, MarketViewSet, CategoryViewSet
 )
 
 from api.views.authenticacion import (
-    CustomAuthtoken, 
+    CustomAuthtoken,
     UpdateUserProfile,
-    user_mobile_signup,
+    CreateUserMobile,
 )
 from api.views.favourites import (
     CheckFavourite,
@@ -33,7 +33,5 @@ urlpatterns = [
     path('user/toggle-favourite', ToggleFavourite.as_view()),
     path('user/update-profile/<int:id>', UpdateUserProfile.as_view()),
 	path('user/token', CustomAuthtoken.as_view()),
-    path('user/signup-mobile', user_mobile_signup),
-    # path('user/upload-picture', user_upload_picture),
-	
+    path('user/signup-mobile', CreateUserMobile.as_view()),
 ]

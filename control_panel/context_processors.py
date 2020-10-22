@@ -1,11 +1,11 @@
 from api.models import Market
-from django.contrib.auth.decorators import login_required
 
-def market(request):
+def user_market_data(request):
     if request.user.is_authenticated:
-	    try:
-	        market = Market.objects.get(owner=request.user)
-	    except Market.DoesNotExist:
-	        market = {}
-	    return {'market': market}
+        try:
+            market = Market.objects.get(owner=request.user)
+            return {'market': market}
+        except Market.DoesNotExist:
+            return {}
     return {}
+    

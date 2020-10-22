@@ -3,7 +3,7 @@ from api.models import ProductRating
 def get_average_rating(ratings):
     size = ratings.count()
     total = 0
-    try: 
+    try:
         for rating in ratings:
             total += rating.rating_value
         return total / size
@@ -17,3 +17,4 @@ def check_already_rated(user, product):
     except ProductRating.DoesNotExist:
         response = False
     return response
+    

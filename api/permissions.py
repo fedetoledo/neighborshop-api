@@ -2,7 +2,7 @@ from rest_framework import permissions
 from .models import Market
 
 class IsLoggedInUserOrAdmin(permissions.BasePermission):
-    
+
     def has_object_permission(self, request, view, obj):
         return obj == request.user or request.user.is_staff
 
@@ -19,4 +19,5 @@ class IsSellerOrAdmin(permissions.BasePermission):
 
     def has_permission(self, request, view):
         market = Market.objects.get(owner=request.user)
-        return (request.user.is_seller and request.data['market'] == market.id) or request.user.is_staff
+        is_owner = request.data['market'] == market.id
+        return (request.user.is_seller and is_owner) or request.user.is_staff

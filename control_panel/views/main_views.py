@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def HomeView(request):
+def home_view(request):
     return render(request, 'home.html')

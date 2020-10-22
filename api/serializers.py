@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from .models import (
-    User, Product, ProductImage, Market, 
+    User, Product, ProductImage, Market,
     Transaction, Favourites, ProductRating, Category
 )
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -50,7 +50,8 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
     class Meta:
         model = User
-        fields = ['id','username','email','phone_number','image','first_name','last_name', 'password', 'is_seller']
+        fields = ['id','username','email','phone_number',
+            'image','first_name','last_name', 'password', 'is_seller']
 
     def create(self, validated_data):
         user = super().create(validated_data)

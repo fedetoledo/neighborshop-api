@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
 from django.urls import reverse
-from django.contrib.auth.hashers import make_password
 from api.utils.models import (
     market_dir_path,
     user_dir_path,
@@ -17,7 +16,8 @@ class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(max_length=50, unique=True)
     phone_number = models.CharField(max_length=10)
-    image = models.ImageField(upload_to=user_dir_path, blank=True,            default=DEFAULT_USER_IMAGE)
+    image = models.ImageField(upload_to=user_dir_path, blank=True, default=DEFAULT_USER_IMAGE)
+    is_seller = models.BooleanField(default=False)
 
     REQUIRED_FIELDS = []
 
@@ -29,6 +29,7 @@ class Market(models.Model):
     description = models.TextField(null=True)
     owner = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
     logo = models.ImageField(upload_to=market_dir_path, blank=True, default=DEFAULT_USER_IMAGE)
+    phone_number = models.CharField(max_length=12, null=False, blank=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -54,10 +55,13 @@ class Favourites(models.Model):
     def __str__(self):
         return self.product.name
 
-class Rated(models.Model):
+class ProductRating(models.Model):
     user = models.ForeignKey(User, related_name='rated_products', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     rating_value = models.FloatField()
+
+    class Meta:
+        unique_together = ('user', 'product')
 
 class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -69,3 +73,4 @@ class Transaction(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to=category_dir_path)
+    

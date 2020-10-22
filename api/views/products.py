@@ -1,7 +1,7 @@
+import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import ProductRating
-import json
 
 from api.utils.views import (
     get_average_rating,
@@ -20,3 +20,4 @@ class ProductRatingAverage(APIView):
             "is_rated": is_rated,
             "average_rating": average_rating
         })
+        
